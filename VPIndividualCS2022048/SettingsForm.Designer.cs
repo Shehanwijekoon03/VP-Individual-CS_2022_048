@@ -8,6 +8,8 @@ partial class SettingsForm
     private NumericUpDown animationSpeedNumericUpDown;
     private Label numberOfItemsLabel;
     private NumericUpDown numberOfItemsNumericUpDown;
+    private Label gridSizeLabel;
+    private NumericUpDown gridSizeNumericUpDown;
     private CheckBox showStepDetailsCheckBox;
     private Button saveButton;
     private Button cancelButton;
@@ -31,11 +33,14 @@ partial class SettingsForm
         animationSpeedNumericUpDown = new NumericUpDown();
         numberOfItemsLabel = new Label();
         numberOfItemsNumericUpDown = new NumericUpDown();
+        gridSizeLabel = new Label();
+        gridSizeNumericUpDown = new NumericUpDown();
         showStepDetailsCheckBox = new CheckBox();
         saveButton = new Button();
         cancelButton = new Button();
         ((System.ComponentModel.ISupportInitialize)animationSpeedNumericUpDown).BeginInit();
         ((System.ComponentModel.ISupportInitialize)numberOfItemsNumericUpDown).BeginInit();
+        ((System.ComponentModel.ISupportInitialize)gridSizeNumericUpDown).BeginInit();
         SuspendLayout();
         // 
         // headingLabel
@@ -84,13 +89,31 @@ partial class SettingsForm
         numberOfItemsNumericUpDown.TabIndex = 4;
         numberOfItemsNumericUpDown.Value = new decimal(new int[] { 5, 0, 0, 0 });
         // 
+        // gridSizeLabel
+        // 
+        gridSizeLabel.Location = new Point(31, 172);
+        gridSizeLabel.Name = "gridSizeLabel";
+        gridSizeLabel.Size = new Size(137, 23);
+        gridSizeLabel.TabIndex = 5;
+        gridSizeLabel.Text = "Grid Size";
+        // 
+        // gridSizeNumericUpDown
+        // 
+        gridSizeNumericUpDown.Location = new Point(201, 170);
+        gridSizeNumericUpDown.Maximum = new decimal(new int[] { 40, 0, 0, 0 });
+        gridSizeNumericUpDown.Minimum = new decimal(new int[] { 8, 0, 0, 0 });
+        gridSizeNumericUpDown.Name = "gridSizeNumericUpDown";
+        gridSizeNumericUpDown.Size = new Size(120, 23);
+        gridSizeNumericUpDown.TabIndex = 6;
+        gridSizeNumericUpDown.Value = new decimal(new int[] { 20, 0, 0, 0 });
+        // 
         // showStepDetailsCheckBox
         // 
         showStepDetailsCheckBox.AutoSize = true;
-        showStepDetailsCheckBox.Location = new Point(31, 170);
+        showStepDetailsCheckBox.Location = new Point(31, 215);
         showStepDetailsCheckBox.Name = "showStepDetailsCheckBox";
         showStepDetailsCheckBox.Size = new Size(117, 19);
-        showStepDetailsCheckBox.TabIndex = 5;
+        showStepDetailsCheckBox.TabIndex = 7;
         showStepDetailsCheckBox.Text = "Show Step Details";
         showStepDetailsCheckBox.UseVisualStyleBackColor = true;
         // 
@@ -100,20 +123,20 @@ partial class SettingsForm
         saveButton.FlatStyle = FlatStyle.Flat;
         saveButton.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
         saveButton.ForeColor = Color.White;
-        saveButton.Location = new Point(56, 222);
+        saveButton.Location = new Point(56, 260);
         saveButton.Name = "saveButton";
         saveButton.Size = new Size(110, 40);
-        saveButton.TabIndex = 6;
+        saveButton.TabIndex = 8;
         saveButton.Text = "Save";
         saveButton.UseVisualStyleBackColor = false;
         saveButton.Click += SaveButton_Click;
         // 
         // cancelButton
         // 
-        cancelButton.Location = new Point(187, 222);
+        cancelButton.Location = new Point(187, 260);
         cancelButton.Name = "cancelButton";
         cancelButton.Size = new Size(110, 40);
-        cancelButton.TabIndex = 7;
+        cancelButton.TabIndex = 9;
         cancelButton.Text = "Cancel";
         cancelButton.UseVisualStyleBackColor = true;
         cancelButton.Click += CancelButton_Click;
@@ -124,10 +147,12 @@ partial class SettingsForm
         AutoScaleDimensions = new SizeF(7F, 15F);
         AutoScaleMode = AutoScaleMode.Font;
         CancelButton = cancelButton;
-        ClientSize = new Size(356, 287);
+        ClientSize = new Size(356, 324);
         Controls.Add(cancelButton);
         Controls.Add(saveButton);
         Controls.Add(showStepDetailsCheckBox);
+        Controls.Add(gridSizeNumericUpDown);
+        Controls.Add(gridSizeLabel);
         Controls.Add(numberOfItemsNumericUpDown);
         Controls.Add(numberOfItemsLabel);
         Controls.Add(animationSpeedNumericUpDown);
@@ -142,6 +167,7 @@ partial class SettingsForm
         Text = "SettingsForm";
         ((System.ComponentModel.ISupportInitialize)animationSpeedNumericUpDown).EndInit();
         ((System.ComponentModel.ISupportInitialize)numberOfItemsNumericUpDown).EndInit();
+        ((System.ComponentModel.ISupportInitialize)gridSizeNumericUpDown).EndInit();
         ResumeLayout(false);
         PerformLayout();
     }

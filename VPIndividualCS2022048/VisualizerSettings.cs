@@ -6,6 +6,8 @@ public class VisualizerSettings
 
     public int NumberOfItems { get; set; } = 20;
 
+    public int GridSize { get; set; } = 20;
+
     public bool ShowStepDetails { get; set; } = true;
 
     public VisualizerSettings Clone()
@@ -14,6 +16,7 @@ public class VisualizerSettings
         {
             AnimationSpeed = AnimationSpeed,
             NumberOfItems = NumberOfItems,
+            GridSize = GridSize,
             ShowStepDetails = ShowStepDetails
         };
     }
