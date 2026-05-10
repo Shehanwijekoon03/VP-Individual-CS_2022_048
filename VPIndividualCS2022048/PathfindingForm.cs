@@ -4,17 +4,20 @@ namespace VPIndividualCS2022048;
 
 public partial class PathfindingForm : Form
 {
-    private const int GridSize = 20;
     private readonly MainForm _mainForm;
     private readonly DijkstraPathfinder _pathfinder = new();
     private readonly System.Windows.Forms.Timer _animationTimer = new();
     private VisualizerSettings _settings = new();
-    private GridCellState[,] _grid = new GridCellState[GridSize, GridSize];
-    private readonly Point _startPoint = new(1, 1);
-    private readonly Point _endPoint = new(GridSize - 2, GridSize - 2);
+    private GridCellState[,] _grid = new GridCellState[20, 20];
     private List<PathfindingStep> _steps = new();
     private int _currentStepIndex;
     private bool _isAnimating;
+
+    private int GridSize => Math.Max(8, _settings.GridSize);
+
+    private Point StartPoint => new(1, 1);
+
+    private Point EndPoint => new(GridSize - 2, GridSize - 2);
 
     public PathfindingForm(MainForm mainForm)
     {
@@ -30,13 +33,20 @@ public partial class PathfindingForm : Form
     {
         StopAnimation();
 
-        using SettingsForm settingsForm = new(_settings);
+        using SettingsForm settingsForm = new(_settings, isPathfindingMode: true);
 
         if (settingsForm.ShowDialog(this) == DialogResult.OK)
         {
+            int previousGridSize = GridSize;
             _settings = settingsForm.SelectedSettings.Clone();
             ApplySettings();
             UpdateSettingsSummary();
+
+            if (GridSize != previousGridSize)
+            {
+                ResetGrid();
+                statusLabel.Text = $"Grid resized to {GridSize} x {GridSize}.";
+            }
         }
     }
 
@@ -61,33 +71,13 @@ public partial class PathfindingForm : Form
         }
 
         RestoreEditableGridState();
-        _steps = _pathfinder.CreateSteps(_grid, _startPoint, _endPoint);
+        _steps = _pathfinder.CreateSteps(_grid, StartPoint, EndPoint);
         _currentStepIndex = 0;
         _isAnimating = true;
         _animationTimer.Start();
         startButton.Text = "Pause";
         SetEditingEnabled(false);
         statusLabel.Text = "Running Dijkstra search...";
-    }
-
-    private void ClearWallsButton_Click(object? sender, EventArgs e)
-    {
-        StopAnimation();
-
-        for (int row = 0; row < GridSize; row++)
-        {
-            for (int column = 0; column < GridSize; column++)
-            {
-                if (_grid[row, column] == GridCellState.Wall)
-                {
-                    _grid[row, column] = GridCellState.Empty;
-                }
-            }
-        }
-
-        ReapplyAnchors();
-        statusLabel.Text = "Walls cleared.";
-        gridPanel.Invalidate();
     }
 
     private void ResetGridButton_Click(object? sender, EventArgs e)
@@ -114,7 +104,7 @@ public partial class PathfindingForm : Form
             return;
         }
 
-        if (cell == _startPoint || cell == _endPoint)
+        if (cell == StartPoint || cell == EndPoint)
         {
             statusLabel.Text = "Start and end cells are fixed for this version.";
             return;
@@ -185,7 +175,6 @@ public partial class PathfindingForm : Form
     private void SetEditingEnabled(bool enabled)
     {
         _isAnimating = !enabled && _animationTimer.Enabled;
-        clearWallsButton.Enabled = enabled;
         resetGridButton.Enabled = enabled;
         openSettingsButton.Enabled = enabled;
     }
@@ -208,8 +197,10 @@ public partial class PathfindingForm : Form
 
     private void ReapplyAnchors()
     {
-        _grid[_startPoint.Y, _startPoint.X] = GridCellState.Start;
-        _grid[_endPoint.Y, _endPoint.X] = GridCellState.End;
+        Point startPoint = StartPoint;
+        Point endPoint = EndPoint;
+        _grid[startPoint.Y, startPoint.X] = GridCellState.Start;
+        _grid[endPoint.Y, endPoint.X] = GridCellState.End;
     }
 
     private bool TryGetCellFromMouse(Point location, out Point cell)

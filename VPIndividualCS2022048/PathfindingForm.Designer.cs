@@ -7,11 +7,9 @@ partial class PathfindingForm
     private Label descriptionLabel;
     private Panel gridPanel;
     private Button startButton;
-    private Button clearWallsButton;
     private Button resetGridButton;
     private GroupBox settingsGroupBox;
     private Label settingsValueLabel;
-    private Label instructionsLabel;
     private Label statusLabel;
     private Button openSettingsButton;
     private Button backButton;
@@ -34,11 +32,9 @@ partial class PathfindingForm
         descriptionLabel = new Label();
         gridPanel = new Panel();
         startButton = new Button();
-        clearWallsButton = new Button();
         resetGridButton = new Button();
         settingsGroupBox = new GroupBox();
         settingsValueLabel = new Label();
-        instructionsLabel = new Label();
         statusLabel = new Label();
         openSettingsButton = new Button();
         backButton = new Button();
@@ -87,26 +83,12 @@ partial class PathfindingForm
         startButton.UseVisualStyleBackColor = false;
         startButton.Click += StartButton_Click;
         // 
-        // clearWallsButton
-        // 
-        clearWallsButton.BackColor = Color.FromArgb(52, 152, 219);
-        clearWallsButton.FlatStyle = FlatStyle.Flat;
-        clearWallsButton.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
-        clearWallsButton.ForeColor = Color.White;
-        clearWallsButton.Location = new Point(632, 206);
-        clearWallsButton.Name = "clearWallsButton";
-        clearWallsButton.Size = new Size(244, 44);
-        clearWallsButton.TabIndex = 4;
-        clearWallsButton.Text = "Clear Walls";
-        clearWallsButton.UseVisualStyleBackColor = false;
-        clearWallsButton.Click += ClearWallsButton_Click;
-        // 
         // resetGridButton
         // 
-        resetGridButton.Location = new Point(632, 262);
+        resetGridButton.Location = new Point(632, 206);
         resetGridButton.Name = "resetGridButton";
         resetGridButton.Size = new Size(244, 44);
-        resetGridButton.TabIndex = 5;
+        resetGridButton.TabIndex = 4;
         resetGridButton.Text = "Reset Grid";
         resetGridButton.UseVisualStyleBackColor = true;
         resetGridButton.Click += ResetGridButton_Click;
@@ -114,10 +96,10 @@ partial class PathfindingForm
         // settingsGroupBox
         // 
         settingsGroupBox.Controls.Add(settingsValueLabel);
-        settingsGroupBox.Location = new Point(632, 332);
+        settingsGroupBox.Location = new Point(632, 286);
         settingsGroupBox.Name = "settingsGroupBox";
         settingsGroupBox.Size = new Size(244, 120);
-        settingsGroupBox.TabIndex = 6;
+        settingsGroupBox.TabIndex = 5;
         settingsGroupBox.TabStop = false;
         settingsGroupBox.Text = "Current Settings";
         // 
@@ -128,24 +110,14 @@ partial class PathfindingForm
         settingsValueLabel.Size = new Size(206, 67);
         settingsValueLabel.TabIndex = 0;
         // 
-        // instructionsLabel
-        // 
-        instructionsLabel.BorderStyle = BorderStyle.FixedSingle;
-        instructionsLabel.Location = new Point(906, 150);
-        instructionsLabel.Name = "instructionsLabel";
-        instructionsLabel.Padding = new Padding(10);
-        instructionsLabel.Size = new Size(283, 156);
-        instructionsLabel.TabIndex = 7;
-        instructionsLabel.Text = "Instructions:\r\n\r\n- Green cell = Start\r\n- Red cell = End\r\n- Click empty cells to add walls\r\n- Click a wall again to remove it\r\n- Blue cells are explored\r\n- Yellow cells show the final path";
-        // 
         // statusLabel
         // 
         statusLabel.BorderStyle = BorderStyle.FixedSingle;
-        statusLabel.Location = new Point(632, 472);
+        statusLabel.Location = new Point(632, 426);
         statusLabel.Name = "statusLabel";
         statusLabel.Padding = new Padding(8, 6, 8, 6);
-        statusLabel.Size = new Size(557, 86);
-        statusLabel.TabIndex = 8;
+        statusLabel.Size = new Size(557, 153);
+        statusLabel.TabIndex = 6;
         statusLabel.Text = "Ready.";
         // 
         // openSettingsButton
@@ -154,20 +126,20 @@ partial class PathfindingForm
         openSettingsButton.FlatStyle = FlatStyle.Flat;
         openSettingsButton.Font = new Font("Segoe UI", 11F, FontStyle.Bold);
         openSettingsButton.ForeColor = Color.White;
-        openSettingsButton.Location = new Point(632, 577);
+        openSettingsButton.Location = new Point(632, 600);
         openSettingsButton.Name = "openSettingsButton";
         openSettingsButton.Size = new Size(244, 48);
-        openSettingsButton.TabIndex = 9;
+        openSettingsButton.TabIndex = 7;
         openSettingsButton.Text = "Open Settings";
         openSettingsButton.UseVisualStyleBackColor = false;
         openSettingsButton.Click += OpenSettingsButton_Click;
         // 
         // backButton
         // 
-        backButton.Location = new Point(906, 577);
+        backButton.Location = new Point(906, 600);
         backButton.Name = "backButton";
         backButton.Size = new Size(283, 48);
-        backButton.TabIndex = 10;
+        backButton.TabIndex = 8;
         backButton.Text = "Back to Main";
         backButton.UseVisualStyleBackColor = true;
         backButton.Click += BackButton_Click;
@@ -180,10 +152,8 @@ partial class PathfindingForm
         Controls.Add(backButton);
         Controls.Add(openSettingsButton);
         Controls.Add(statusLabel);
-        Controls.Add(instructionsLabel);
         Controls.Add(settingsGroupBox);
         Controls.Add(resetGridButton);
-        Controls.Add(clearWallsButton);
         Controls.Add(startButton);
         Controls.Add(gridPanel);
         Controls.Add(descriptionLabel);
